@@ -45,6 +45,7 @@
               <label>Judul<input name="title" required /></label>
               <div class="form-grid"><label>Urutan<input name="sort_order" type="number" min="0" required /></label><label>Format audio<select name="audio_type"><option value="audio/mpeg">MP3</option><option value="audio/wav">WAV</option></select></label></div>
               <label>Audio URL<input name="audio_url" type="url" placeholder="https://..." required /></label>
+              <audio class="editor-audio" id="editor-audio" controls preload="none" hidden></audio>
               <label class="check-label"><input name="published" type="checkbox" checked /> Tampilkan di website publik</label>
               <label>Lirik <span class="hint">Satu baris per baris lirik</span><textarea name="lyrics" rows="14" placeholder="Tulis lirik di sini..."></textarea></label>
               <div class="editor-actions"><button class="button" type="submit">Simpan chant</button><button class="button danger" id="delete-chant-button" type="button">Hapus</button></div>
@@ -63,6 +64,14 @@
         </section>
       </section>
     </main>
+    <div class="modal-backdrop" id="admin-modal" hidden>
+      <section class="admin-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <p class="modal-kicker" id="modal-kicker">CIVILION ADMIN</p>
+        <h2 id="modal-title">Berhasil</h2>
+        <p id="modal-message"></p>
+        <div class="modal-actions" id="modal-actions"></div>
+      </section>
+    </div>
     <script src="supabase-config.js"></script>
     <script src="supabase-api.js"></script>
     <script src="lyrics.js"></script>
