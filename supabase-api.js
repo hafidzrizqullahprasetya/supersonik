@@ -72,6 +72,31 @@
     },
     async remove(table, id) {
       return request(`/rest/v1/${table}?id=eq.${encodeURIComponent(id)}`, { method: 'DELETE' });
+    },
+    async uploadMedia(path, file) {
+      const token = getSession()?.access_token;
+      const objectPath = path.split('/').map(encodeURIComponent).join('/');
+      const response = await fetch(`${config.url}/storage/v1/object/media/${objectPath}`, {
+        method: 'POST',
+        headers: { apikey: config.publishableKey, Authorization: `Bearer ${token}`, 'Content-Type': file.type || 'application/octet-stream', 'x-upsert': 'true' },
+        body: file
+      });
+      if (!response.ok) throw new Error(await response.text());
+      return `${config.url}/storage/v1/object/public/media/${objectPath}`;
+    },
+    async deleteMedia(path) {
+      const token = getSession()?.access_token;
+      const response = await fetch(`${config.url}/storage/v1/object/remove`, {
+        method: 'POST',
+        headers: { apikey: config.publishableKey, Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prefixes: [path] })
+      });
+      if (!response.ok) throw new Error(await response.text());
+      return response.json();
+    },
+    mediaPath(url) {
+      const marker = '/storage/v1/object/public/media/';
+      return url?.includes(marker) ? decodeURIComponent(url.split(marker)[1]) : null;
     }
   };
 })();

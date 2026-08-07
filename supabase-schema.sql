@@ -29,6 +29,7 @@ create unique index if not exists chants_audio_url_key on public.chants (audio_u
 alter table public.site_settings enable row level security;
 alter table public.chants enable row level security;
 alter table public.admin_users enable row level security;
+alter table public.chants alter column audio_url drop not null;
 
 create or replace function public.is_admin()
 returns boolean
@@ -42,6 +43,22 @@ as $$
     where lower(email) = lower(coalesce(auth.jwt() ->> 'email', ''))
   );
 $$;
+
+insert into storage.buckets (id, name, public)
+values ('media', 'media', true)
+on conflict (id) do update set public = true;
+
+drop policy if exists "Public can read media" on storage.objects;
+create policy "Public can read media" on storage.objects for select using (bucket_id = 'media');
+
+drop policy if exists "Admins upload media" on storage.objects;
+create policy "Admins upload media" on storage.objects for insert with check (bucket_id = 'media' and public.is_admin());
+
+drop policy if exists "Admins update media" on storage.objects;
+create policy "Admins update media" on storage.objects for update using (bucket_id = 'media' and public.is_admin()) with check (bucket_id = 'media' and public.is_admin());
+
+drop policy if exists "Admins delete media" on storage.objects;
+create policy "Admins delete media" on storage.objects for delete using (bucket_id = 'media' and public.is_admin());
 
 drop policy if exists "Public can read settings" on public.site_settings;
 create policy "Public can read settings" on public.site_settings for select using (true);
