@@ -118,19 +118,21 @@ img { display: block; max-width: 100%; }
 .logo-image-row { gap: 0; }
 .logo-image-row img { width: min(760px, 82vw); height: 68px; object-fit: contain; opacity: 1; }
 
-.release { position: relative; display: grid; grid-template-columns: minmax(250px, .8fr) minmax(400px, 1.2fr); min-height: 760px; background: var(--paper); color: var(--ink); padding: 140px var(--gutter); gap: clamp(35px, 5vw, 85px); align-items: start; overflow: visible; }
-.release::after { content: "NEW RELEASE"; position: absolute; top: 40px; right: -5px; font-family: Anton, sans-serif; font-size: clamp(80px, 13vw, 205px); line-height: 1; color: transparent; -webkit-text-stroke: 1px rgba(11,11,11,.08); white-space: nowrap; pointer-events: none; }
-.release-heading { position: relative; z-index: 2; align-self: start; padding-top: 22px; }
+.release { position: relative; display: grid; grid-template-columns: minmax(280px, .76fr) minmax(460px, 1.24fr); grid-template-rows: auto auto; min-height: 0; background: var(--paper); color: var(--ink); padding: 112px var(--gutter) 124px; gap: 72px clamp(35px, 6vw, 110px); align-items: start; overflow: visible; }
+.release::before { content: "02 / 05"; position: absolute; top: 40px; left: var(--gutter); color: var(--gray); font-size: 10px; font-weight: 700; letter-spacing: .16em; }
+.release::after { content: "CIVILION"; position: absolute; top: 28px; right: -5px; font-family: Anton, sans-serif; font-size: clamp(80px, 13vw, 205px); line-height: 1; color: transparent; -webkit-text-stroke: 1px rgba(11,11,11,.08); white-space: nowrap; pointer-events: none; }
+.release-heading { position: relative; z-index: 2; align-self: stretch; display: flex; flex-direction: column; justify-content: center; padding: 34px 0 30px; border-top: 2px solid var(--ink); border-bottom: 1px solid var(--line); }
 .release-heading { order: 1; }
-.release h2 { font-size: clamp(62px, 7vw, 110px); }
+.release-heading::after { content: "VINYL / CHANT ARCHIVE"; margin-top: auto; padding-top: 30px; color: var(--gray); font-size: 9px; font-weight: 700; letter-spacing: .14em; }
+.release h2 { max-width: 520px; font-size: clamp(62px, 7vw, 110px); }
 .release h2 span, .catalog-heading h3 span { display: block; }
 .record-art { position: relative; z-index: 2; aspect-ratio: 1; background: var(--red); box-shadow: 0 32px 70px rgba(0,0,0,.22); overflow: hidden; }
-.record-art { order: 2; grid-column: 2; width: min(100%, 520px); margin-left: auto; }
+.record-art { order: 2; grid-column: 2; width: min(100%, 560px); margin-left: auto; transform: translateY(18px); }
 .record-art::before { content: ""; position: absolute; inset: 0; opacity: .24; background: repeating-linear-gradient(125deg, transparent 0 15px, rgba(0,0,0,.23) 16px 17px), radial-gradient(circle at 30% 10%, transparent 0 20%, #000 21% 22%, transparent 23%); }
 .record-copy { position: absolute; z-index: 2; inset: 8%; display: flex; flex-direction: column; justify-content: space-between; }
 .record-copy span, .record-copy small { font-size: 9px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; }
 .record-copy strong { font-family: Anton, sans-serif; font-size: clamp(38px, 4.5vw, 68px); font-weight: 400; line-height: .84; color: var(--white); }
-.record-disc { position: absolute; width: 66%; aspect-ratio: 1; right: -30%; top: 17%; border-radius: 50%; background: repeating-radial-gradient(circle, #111 0 3px, #222 4px 5px); box-shadow: -12px 10px 30px rgba(0,0,0,.28); }
+.record-disc { position: absolute; width: 70%; aspect-ratio: 1; right: -31%; top: 15%; border-radius: 50%; background: repeating-radial-gradient(circle, #111 0 3px, #222 4px 5px); box-shadow: -12px 10px 30px rgba(0,0,0,.28); }
 .record-disc i { position: absolute; width: 29%; aspect-ratio: 1; left: 35.5%; top: 35.5%; border-radius: 50%; background: var(--white); border: 16px solid var(--red); }
 .player-panel { position: relative; z-index: 2; border-top: 1px solid var(--ink); padding: 22px 0 0; display: grid; grid-template-columns: 55px 1fr 74px; column-gap: 20px; width: min(760px, 100%); margin: 38px 0 0 auto; }
 .track-number { font-size: 11px; color: #6d6b65; }
@@ -149,7 +151,7 @@ img { display: block; max-width: 100%; }
 .progress { position: relative; border: 0; padding: 0; height: 2px; background: rgba(11,11,11,.2); cursor: pointer; }
 .progress-fill { display: block; width: 0; height: 100%; background: var(--red); }
 .track-audio { display: none; }
-.chant-catalog { grid-column: 1 / -1; position: relative; z-index: 2; display: grid; grid-template-columns: .82fr 2.21fr; gap: clamp(35px, 5vw, 85px); padding-top: 110px; }
+.chant-catalog { grid-column: 1 / -1; position: relative; z-index: 2; display: grid; grid-template-columns: .76fr 1.24fr; gap: clamp(35px, 6vw, 110px); padding-top: 54px; border-top: 1px solid var(--line); }
 .chant-catalog { order: 3; }
 .catalog-heading { position: -webkit-sticky; position: sticky; top: 24px; align-self: start; z-index: 3; padding: 18px 18px 22px 0; background: var(--paper); }
 .catalog-heading h3 { margin: 14px 0 0; font-family: Anton, sans-serif; font-size: clamp(52px, 5vw, 84px); font-weight: 400; line-height: .88; }
@@ -186,7 +188,7 @@ img { display: block; max-width: 100%; }
 @media (max-width: 980px) {
   .release { grid-template-columns: 1fr 1fr; }
   .release-heading { grid-column: 1 / 3; }
-  .record-art { grid-column: 1 / 3; justify-self: center; }
+  .record-art { grid-column: 1 / 3; justify-self: center; transform: none; }
   .chant-catalog { padding-top: 70px; }
 }
 
@@ -217,10 +219,11 @@ img { display: block; max-width: 100%; }
    .logo-image-row img { height: 48px; }
    .release { display: flex; flex-direction: column; min-height: 0; padding: 80px var(--gutter) 88px; }
   .release::after { top: 28px; font-size: 24vw; }
-  .release-heading { margin-bottom: 42px; padding: 0; }
+   .release-heading { margin-bottom: 42px; padding: 0 0 24px; border-top: 0; }
+   .release-heading::after { padding-top: 24px; }
    .hero h1 span + em, .release h2 span + span, .catalog-heading h3 span + span { margin-top: .16em; }
    .release h2 { font-size: clamp(48px, 16.5vw, 72px); line-height: .86; letter-spacing: -.035em; }
-  .record-art { width: min(100%, 440px); margin: 0 auto 44px; }
+   .record-art { width: min(100%, 440px); margin: 0 auto 44px; transform: none; }
   .record-copy strong { font-size: clamp(43px, 14vw, 60px); }
    .record-disc i { border-width: 10px; }
    .player-panel { width: 100%; padding-top: 16px; grid-template-columns: minmax(0, 1fr) 54px; column-gap: 14px; align-items: center; }
