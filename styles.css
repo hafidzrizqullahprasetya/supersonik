@@ -151,6 +151,7 @@ img { display: block; max-width: 100%; }
 .track-audio { display: none; }
 .chant-catalog { grid-column: 1 / -1; position: relative; z-index: 2; display: grid; grid-template-columns: .82fr 2.21fr; gap: clamp(35px, 5vw, 85px); padding-top: 110px; }
 .chant-catalog { order: 3; }
+.catalog-heading { position: sticky; top: 24px; align-self: start; z-index: 3; padding: 18px 18px 22px 0; background: var(--paper); }
 .catalog-heading h3 { margin: 14px 0 0; font-family: Anton, sans-serif; font-size: clamp(52px, 5vw, 84px); font-weight: 400; line-height: .88; }
 .chant-list { border-top: 1px solid var(--ink); }
 .chant-entry { border-bottom: 1px solid var(--line); }
@@ -233,7 +234,7 @@ img { display: block; max-width: 100%; }
   .progress-wrap { grid-column: 1 / 3; grid-template-columns: 31px minmax(0, 1fr) 31px; gap: 8px; margin-top: 24px; }
   .progress { height: 3px; }
     .chant-catalog { display: flex; flex-direction: column; padding-top: 54px; }
-   .catalog-heading { margin-bottom: 28px; }
+   .catalog-heading { position: static; margin-bottom: 28px; padding: 0; }
    .catalog-heading h3 { font-size: clamp(48px, 16vw, 70px); line-height: .86; }
    .catalog-heading h3 span + span { margin-top: .18em; }
    .chant-list { display: block; }
