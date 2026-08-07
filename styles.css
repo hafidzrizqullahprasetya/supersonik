@@ -137,6 +137,7 @@ img { display: block; max-width: 100%; }
 .record-copy span, .record-copy small { font-size: 9px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; }
 .record-copy strong { max-width: 75%; font-family: Anton, sans-serif; font-size: clamp(43px, 5.2vw, 78px); font-weight: 400; line-height: .96; letter-spacing: -.025em; color: var(--white); }
 .record-disc { position: absolute; width: 70%; height: auto; right: -31%; top: 15%; display: block; border-radius: 50%; background: #0b0b0b; filter: drop-shadow(-12px 10px 18px rgba(0,0,0,.3)); }
+.record-disc img { display: block; width: 100%; height: auto; border-radius: 50%; }
 .player-panel { position: relative; z-index: 2; border-top: 1px solid var(--ink); padding: 22px 0 0; display: grid; grid-template-columns: minmax(0, 1fr) 70px; column-gap: 20px; row-gap: 0; width: min(760px, 100%); margin: 38px 0 0 auto; }
 .track-copy span { font-size: 10px; text-transform: uppercase; letter-spacing: .12em; color: #aaa49a; }
 .track-copy h3 { margin: 11px 0 4px; font-family: "DM Serif Display", serif; font-size: clamp(25px, 2.2vw, 34px); font-weight: 400; }
