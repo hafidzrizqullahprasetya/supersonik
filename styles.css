@@ -123,7 +123,6 @@ img { display: block; max-width: 100%; }
 .release::after { content: "CIVILION"; position: absolute; top: 28px; right: -5px; font-family: Anton, sans-serif; font-size: clamp(80px, 13vw, 205px); line-height: 1; color: transparent; -webkit-text-stroke: 1px rgba(11,11,11,.08); white-space: nowrap; pointer-events: none; }
 .release-heading { position: relative; z-index: 2; align-self: stretch; display: flex; flex-direction: column; justify-content: center; padding: 34px 0 30px; border-top: 2px solid var(--ink); border-bottom: 1px solid var(--line); }
 .release-heading { order: 1; }
-.release-heading::after { content: "VINYL / CHANT ARCHIVE"; margin-top: auto; padding-top: 30px; color: var(--gray); font-size: 9px; font-weight: 700; letter-spacing: .14em; }
 .release h2 { max-width: 520px; font-size: clamp(62px, 7vw, 110px); }
 .release h2 span, .catalog-heading h3 span { display: block; }
 .record-art { position: relative; z-index: 2; aspect-ratio: 1; background: var(--red); box-shadow: 0 32px 70px rgba(0,0,0,.22); overflow: hidden; }
@@ -220,7 +219,6 @@ img { display: block; max-width: 100%; }
    .release { display: flex; flex-direction: column; min-height: 0; padding: 80px var(--gutter) 88px; }
   .release::after { top: 28px; font-size: 24vw; }
    .release-heading { margin-bottom: 42px; padding: 0 0 24px; border-top: 0; }
-   .release-heading::after { padding-top: 24px; }
    .hero h1 span + em, .release h2 span + span, .catalog-heading h3 span + span { margin-top: .16em; }
    .release h2 { font-size: clamp(48px, 16.5vw, 72px); line-height: .86; letter-spacing: -.035em; }
    .record-art { width: min(100%, 440px); margin: 0 auto 44px; transform: none; }
