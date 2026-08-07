@@ -136,8 +136,7 @@ img { display: block; max-width: 100%; }
 .record-copy { position: absolute; z-index: 2; inset: 8%; display: flex; flex-direction: column; justify-content: space-between; }
 .record-copy span, .record-copy small { font-size: 9px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; }
 .record-copy strong { max-width: 75%; font-family: Anton, sans-serif; font-size: clamp(43px, 5.2vw, 78px); font-weight: 400; line-height: .96; letter-spacing: -.025em; color: var(--white); }
-.record-disc { position: absolute; width: 70%; aspect-ratio: 1; right: -31%; top: 15%; border-radius: 50%; background: repeating-radial-gradient(circle, #111 0 3px, #222 4px 5px); box-shadow: -12px 10px 30px rgba(0,0,0,.28); }
-.record-disc i { position: absolute; width: 29%; aspect-ratio: 1; left: 35.5%; top: 35.5%; border-radius: 50%; background: var(--white); border: 16px solid var(--red); }
+.record-disc { position: absolute; width: 70%; height: auto; right: -31%; top: 15%; display: block; filter: drop-shadow(-12px 10px 18px rgba(0,0,0,.3)); }
 .player-panel { position: relative; z-index: 2; border-top: 1px solid var(--ink); padding: 22px 0 0; display: grid; grid-template-columns: minmax(0, 1fr) 70px; column-gap: 20px; row-gap: 0; width: min(760px, 100%); margin: 38px 0 0 auto; }
 .track-copy span { font-size: 10px; text-transform: uppercase; letter-spacing: .12em; color: #aaa49a; }
 .track-copy h3 { margin: 11px 0 4px; font-family: "DM Serif Display", serif; font-size: clamp(25px, 2.2vw, 34px); font-weight: 400; }
@@ -234,6 +233,7 @@ img { display: block; max-width: 100%; }
    .hero h1 span + em, .release h2 span + span, .catalog-heading h3 span + span { margin-top: .16em; }
    .release h2 { font-size: clamp(48px, 16.5vw, 72px); line-height: .86; letter-spacing: -.035em; }
    .record-art { width: min(100%, 440px); margin: 0 auto 44px; transform: none; }
+   .record-disc { width: 68%; right: -29%; top: 16%; }
   .record-copy strong { font-size: clamp(43px, 14vw, 60px); }
    .record-disc i { border-width: 10px; }
    .player-panel { width: 100%; padding-top: 16px; grid-template-columns: minmax(0, 1fr) 54px; column-gap: 14px; align-items: center; }
