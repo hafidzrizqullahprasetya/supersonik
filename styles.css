@@ -71,7 +71,7 @@ img { display: block; max-width: 100%; }
   position: absolute;
   z-index: -3;
   inset: 0;
-  background-image: url("https://lh3.googleusercontent.com/sitesv/AG8ngQWV8FDV96FrWY20ujABFs2DOMG8uW7Zxx-F07JEUAfXwxeaIIUWpKAeMBnOdNXwlE1ZR2yIR6wwBoOS_xWLnEeicaHb021pKfwU6IbGaoBykyBRCGTle5nZH7NjdtlKYL5H9B290B6182E7s1fQ0v8oQv65wVz8MAgBfIWclhSlF_k1wlWFn9KaJFwa=w16383");
+  background-image: url("hero-bg.jpg");
   background-size: cover;
   background-position: center 42%;
   filter: grayscale(1) contrast(1.08);
