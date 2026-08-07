@@ -1,6 +1,6 @@
 window.civilionContentPromise = (async () => {
-  if (!window.SupabaseAPI) return null;
   try {
+    if (!window.SupabaseAPI) return null;
     const [settings, chants] = await Promise.all([
       SupabaseAPI.select('site_settings', 'select=key,value'),
       SupabaseAPI.select('chants', 'select=*&published=eq.true&order=sort_order.asc')
@@ -72,6 +72,8 @@ window.civilionContentPromise = (async () => {
     }
   } catch (error) {
     console.warn('Supabase content fallback:', error.message);
+  } finally {
+    document.body.classList.remove('content-loading');
   }
   return null;
 })();

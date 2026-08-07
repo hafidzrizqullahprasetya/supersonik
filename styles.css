@@ -78,7 +78,10 @@ img { display: block; max-width: 100%; }
   background-position: center 42%;
   filter: grayscale(1) contrast(1.08);
   transform: scale(1.015);
+  opacity: 1;
+  transition: opacity .22s ease;
 }
+.content-loading .hero-media { opacity: 0; }
 .hero-shade { position: absolute; z-index: -2; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.42) 0%, rgba(0,0,0,.15) 34%, rgba(0,0,0,.88) 100%); }
 .hero-grid {
   position: absolute;
