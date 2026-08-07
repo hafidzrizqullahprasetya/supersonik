@@ -13,6 +13,11 @@ const modalMessage = document.querySelector('#modal-message');
 const modalActions = document.querySelector('#modal-actions');
 const modalKicker = document.querySelector('#modal-kicker');
 const editorAudio = document.querySelector('#editor-audio');
+const mediaPreviews = {
+  hero: document.querySelector('#hero-preview'),
+  logo: document.querySelector('#logo-preview'),
+  collaborator: document.querySelector('#collaborator-preview')
+};
 const mediaInputs = {
   audio: document.querySelector('#audio-file'),
   hero: document.querySelector('#hero-file'),
@@ -64,6 +69,23 @@ function flattenSettings() {
     const [group, key] = field.name.split('.');
     field.value = settings[group]?.[key] || '';
   });
+  updatePreviews();
+}
+
+function updatePreviews() {
+  setPreview(mediaPreviews.hero, settings.hero?.background_url);
+  setPreview(mediaPreviews.logo, settings.branding?.logo_url);
+  setPreview(mediaPreviews.collaborator, settings.branding?.collaborator_logo_url);
+}
+
+function setPreview(preview, url) {
+  if (url) {
+    preview.src = url;
+    preview.hidden = false;
+  } else {
+    preview.removeAttribute('src');
+    preview.hidden = true;
+  }
 }
 
 function collectSettings() {
@@ -87,6 +109,7 @@ async function uploadSettingMedia(file, group, fieldName) {
   settings[group] ||= {};
   settings[group][fieldName] = url;
   settingsForm.elements[`${group}.${fieldName}`].value = url;
+  updatePreviews();
   await api.upsert('site_settings', [{ key: group, value: settings[group], updated_at: new Date().toISOString() }], 'key');
   await showModal({ title: 'Upload berhasil', message: `${group} sudah diperbarui dan siap dipakai website.` });
 }
@@ -103,6 +126,7 @@ async function deleteSettingMedia(group, fieldName) {
   if (path) await api.deleteMedia(path);
   settings[group][fieldName] = '';
   settingsForm.elements[`${group}.${fieldName}`].value = '';
+  updatePreviews();
   await api.upsert('site_settings', [{ key: group, value: settings[group], updated_at: new Date().toISOString() }], 'key');
   await showModal({ title: 'File terhapus', message: 'Media sudah dihapus dari Storage dan pengaturan.' });
 }
@@ -198,6 +222,9 @@ document.querySelector('#delete-audio-button').addEventListener('click', async (
 mediaInputs.hero.addEventListener('change', async () => { const file = mediaInputs.hero.files[0]; if (!file) return; try { await uploadSettingMedia(file, 'hero', 'background_url'); } catch (error) { await showModal({ title: 'Upload background gagal', message: error.message, tone: 'error' }); } });
 mediaInputs.logo.addEventListener('change', async () => { const file = mediaInputs.logo.files[0]; if (!file) return; try { await uploadSettingMedia(file, 'branding', 'logo_url'); } catch (error) { await showModal({ title: 'Upload logo gagal', message: error.message, tone: 'error' }); } });
 mediaInputs.collaborator.addEventListener('change', async () => { const file = mediaInputs.collaborator.files[0]; if (!file) return; try { await uploadSettingMedia(file, 'branding', 'collaborator_logo_url'); } catch (error) { await showModal({ title: 'Upload logo gagal', message: error.message, tone: 'error' }); } });
+settingsForm.elements['hero.background_url'].addEventListener('input', () => setPreview(mediaPreviews.hero, settingsForm.elements['hero.background_url'].value));
+settingsForm.elements['branding.logo_url'].addEventListener('input', () => setPreview(mediaPreviews.logo, settingsForm.elements['branding.logo_url'].value));
+settingsForm.elements['branding.collaborator_logo_url'].addEventListener('input', () => setPreview(mediaPreviews.collaborator, settingsForm.elements['branding.collaborator_logo_url'].value));
 document.querySelector('#delete-hero-button').addEventListener('click', async () => { try { await deleteSettingMedia('hero', 'background_url'); } catch (error) { await showModal({ title: 'Gagal menghapus background', message: error.message, tone: 'error' }); } });
 document.querySelector('#delete-logo-button').addEventListener('click', async () => { try { await deleteSettingMedia('branding', 'logo_url'); } catch (error) { await showModal({ title: 'Gagal menghapus logo', message: error.message, tone: 'error' }); } });
 document.querySelector('#delete-collaborator-button').addEventListener('click', async () => { try { await deleteSettingMedia('branding', 'collaborator_logo_url'); } catch (error) { await showModal({ title: 'Gagal menghapus logo', message: error.message, tone: 'error' }); } });
