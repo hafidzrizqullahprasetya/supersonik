@@ -168,13 +168,13 @@ img { display: block; max-width: 100%; }
 .chant-item.active strong { color: var(--white); }
 .chant-item b { transition: transform .25s; }
 .chant-item.active b { transform: rotate(45deg); }
-.chant-detail { max-height: 0; overflow: hidden; padding: 0; opacity: 0; scroll-margin-top: 24px; transition: max-height .7s cubic-bezier(.2,.75,.2,1), opacity .4s ease, padding .7s cubic-bezier(.2,.75,.2,1); }
+.chant-detail { max-width: 100%; min-width: 0; max-height: 0; overflow: hidden; padding: 0; opacity: 0; scroll-margin-top: 24px; transition: max-height .7s cubic-bezier(.2,.75,.2,1), opacity .4s ease, padding .7s cubic-bezier(.2,.75,.2,1); }
 .chant-entry.active .chant-detail { max-height: 3000px; padding: 18px 0 48px; opacity: 1; }
 .lyrics-panel { display: grid; grid-template-columns: minmax(170px, .62fr) minmax(0, 1.38fr); gap: clamp(28px, 4vw, 64px); padding: 38px 0; }
-.lyrics-heading { align-self: start; }
+.lyrics-heading { min-width: 0; align-self: start; }
 .lyrics-heading h3 { max-width: 280px; margin: 14px 0 0; font-family: "DM Serif Display", Georgia, serif; font-size: clamp(32px, 3vw, 56px); font-weight: 400; line-height: .98; }
 .lyrics-lines { max-height: 520px; overflow-y: auto; padding: 3px 22px 8px 0; scrollbar-width: thin; scrollbar-color: var(--red) transparent; }
-.lyrics-lines p { margin: 0 0 22px; font-family: "DM Serif Display", Georgia, serif; font-size: clamp(22px, 1.75vw, 31px); line-height: 1.22; }
+.lyrics-lines p { max-width: 100%; margin: 0 0 22px; font-family: "DM Serif Display", Georgia, serif; font-size: clamp(22px, 1.75vw, 31px); line-height: 1.22; overflow-wrap: anywhere; word-break: break-word; }
 .lyrics-lines p:last-child { margin-bottom: 0; }
 
 .site-footer { min-height: 190px; padding: 48px var(--gutter) 32px; display: grid; grid-template-columns: 1fr auto; grid-template-rows: auto 1fr auto; grid-template-areas: "brand links" ". ." "copyright top"; align-items: start; gap: 24px; border-top: 1px solid rgba(255,255,255,.14); }
@@ -241,14 +241,14 @@ img { display: block; max-width: 100%; }
    .chant-list { display: block; }
     .chant-detail { padding-left: 0; }
     .chant-entry.active .chant-detail { padding: 10px 0 34px; }
-    .lyrics-panel { display: flex; flex-direction: column; gap: 28px; padding: 28px 0 32px; }
+   .lyrics-panel { min-width: 0; display: flex; flex-direction: column; gap: 28px; padding: 28px 0 32px; }
    .chant-item { grid-template-columns: 28px minmax(0, 1fr) 20px; align-items: start; margin: 4px 0; padding: 16px 14px; }
    .chant-item strong { overflow: visible; font-size: 19px; line-height: 1.08; white-space: normal; }
    .chant-item b { justify-self: end; }
     .lyrics-panel { gap: 28px; }
    .lyrics-heading h3 { font-size: clamp(34px, 10vw, 52px); }
-   .lyrics-lines { max-height: none; overflow: visible; }
-   .lyrics-lines p { margin-bottom: 17px; font-size: clamp(21px, 6vw, 29px); }
+    .lyrics-lines { width: 100%; max-width: 100%; max-height: none; overflow: visible; padding-right: 0; }
+    .lyrics-lines p { width: 100%; max-width: 100%; margin-bottom: 17px; font-size: clamp(21px, 6vw, 29px); overflow-wrap: anywhere; word-break: break-word; }
    .site-footer { min-height: 0; padding-top: 34px; padding-bottom: max(28px, env(safe-area-inset-bottom)); grid-template-columns: 1fr auto; grid-template-rows: auto 28px auto; grid-template-areas: "brand links" ". ." "copyright top"; gap: 0; }
    .brand-logo { width: 44px; height: 44px; }
    .footer-links { align-items: flex-end; gap: 10px; font-size: 10px; }
