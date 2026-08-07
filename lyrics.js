@@ -28,3 +28,36 @@ const lyricsBySource = {
   'namaHewan.wav': ['Wedhus artinya kambing', 'Jaran artinya kuda', 'Iwak itu artinya ikan', '… (Fakultas lain) itu anjing'],
   'dudiDudiDam.wav': ['Dudidudidam dam dudidudidam', 'Dudidudidam dam dudidudidam', 'Kamu dukung siapa? Teknik', 'Teknik didukung siapa? Kami', 'Kami supersonik, kami dutung teknik', 'Teknik ayo digoyang azek azek azek', 'Teknik jadi juara? Satu', 'Lawannya pulang aja! pulang', 'Kami supersonik, Kami dukung teknik', 'Teknik jadi juara, satu satu satu', 'Obat cacing namanya combatrin', 'Supersonik lawannya pipisin', '….. mending pulang jaga lilin', 'Koyo sarimin']
 };
+
+window.SUPERSONIK_LYRICS = lyricsBySource;
+window.SUPERSONIK_TITLES = {
+  'TeknikGadjahMadaGitar.mp3': 'Teknik Gadjah Mada',
+  'syalalaGitar.mp3': 'Bela Kau',
+  'SupersonikYangKutungguGitar.mp3': 'Supersonik yang Kutunggu',
+  'LaGrandeGitar.mp3': 'La Grande Teknik',
+  'KemenanganGitar.mp3': 'Kemenangan',
+  'HariIniGitar.mp3': 'Hari Ini',
+  'BukalahMatamuGitar': 'Bukalah Matamu',
+  'AyoBangGitar.mp3': 'Ayo Bang Ayo Neng',
+  'weAreThe.wav': 'We Are The Champion',
+  'andecaAndeci.wav': 'Andeca Andeci',
+  'kamiPemenangnya.wav': 'Pesta Pora',
+  'kamiDatangLagi.wav': 'Teknik Datang Lagi',
+  'terbaikUntukmu.wav': 'Terbaik Untukmu',
+  'hitamHitam.wav': 'Biru-Biru (Basket) Teknik',
+  'supersonikTunjukkanAksimu.wav': 'Tunjukkan Aksimu',
+  'seiringJejakLangkahku.wav': 'Seiring Jejak Langkah (POZNAN DANCE)',
+  'syalalalaTunjukkan.wav': 'Syalala Tunjukkan Semangatmu',
+  'kukibarkanBendera.wav': 'Kukibarkan',
+  'teknikSatu.wav': 'Teknik Satu',
+  'kalauAkuTeknik.wav': 'Kalau Aku Teknik',
+  'ayoTeknikJaya.wav': 'Teknik Jaya',
+  'jiRoLuPat.wav': 'Ji Ro Lu Pat',
+  'disiniSupersonik.wav': 'Disini Supersonik',
+  'yoAyoTeknikku.wav': 'Eee Ayo Ayo Ayo',
+  'sudahKubilang.wav': 'Jangan Lawan',
+  'ambrolProtol.wav': 'Ambrol Protol',
+  'namaHewan.wav': 'Nama Hewan dan Artinya',
+  'dudiDudiDam.wav': 'Dudidudidam'
+};
+window.SUPERSONIK_DEFAULT_TITLES = window.SUPERSONIK_TITLES;

@@ -1,3 +1,4 @@
+window.supersonikContentPromise.then(() => {
 const menuButton = document.querySelector('.menu-toggle');
 const navigation = document.querySelector('.main-nav');
 
@@ -40,7 +41,7 @@ const lyricsPanel = document.querySelector('.lyrics-panel');
 const lyricsTitle = document.querySelector('.lyrics-heading h3');
 const lyricsLines = document.querySelector('.lyrics-lines');
 
-const titlesBySource = {
+const titlesBySource = window.SUPERSONIK_TITLES || {
   'TeknikGadjahMadaGitar.mp3': 'Teknik Gadjah Mada',
   'syalalaGitar.mp3': 'Bela Kau',
   'SupersonikYangKutungguGitar.mp3': 'Supersonik yang Kutunggu',
@@ -77,8 +78,8 @@ function sourceFilename(source) {
 
 function renderLyrics(item) {
   const filename = sourceFilename(item.dataset.source);
-  const title = titlesBySource[filename] || item.dataset.title;
-  const lines = lyricsBySource[filename] || [];
+  const title = item.dataset.databaseContent ? item.dataset.title : (titlesBySource[filename] || item.dataset.title);
+  const lines = window.SUPERSONIK_LYRICS[filename] || lyricsBySource[filename] || [];
   lyricsTitle.textContent = title;
   lyricsLines.replaceChildren(...lines.map((line) => {
     const element = document.createElement('p');
@@ -122,7 +123,7 @@ function selectTrack(item, shouldPlay = false) {
   });
   if (chantDetail.parentElement !== entry) entry.append(chantDetail);
   const filename = sourceFilename(item.dataset.source);
-  const title = titlesBySource[filename] || item.dataset.title;
+  const title = item.dataset.databaseContent ? item.dataset.title : (titlesBySource[filename] || item.dataset.title);
   item.dataset.title = title;
   item.querySelector('strong').textContent = title;
   trackTitle.textContent = title;
@@ -180,7 +181,7 @@ trackAudio.addEventListener('timeupdate', updateProgress);
 trackAudio.addEventListener('loadedmetadata', updateProgress);
 
 chantItems.forEach((item) => {
-  const title = titlesBySource[sourceFilename(item.dataset.source)];
+  const title = item.dataset.databaseContent ? item.dataset.title : titlesBySource[sourceFilename(item.dataset.source)];
   if (title) {
     item.dataset.title = title;
     item.querySelector('strong').textContent = title;
@@ -188,3 +189,4 @@ chantItems.forEach((item) => {
 });
 updateProgress();
 renderLyrics(chantItems[0]);
+});
