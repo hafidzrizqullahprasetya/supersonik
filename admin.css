@@ -6,7 +6,7 @@ button, input, textarea, select { font: inherit; }
 button { cursor: pointer; }
 .admin-shell { min-height: 100vh; padding: clamp(20px, 4vw, 70px); }
 .login-card { width: min(520px, 100%); margin: 9vh auto 0; }
-.login-card img { width: 160px; margin-bottom: 70px; }
+.login-card img { width: 160px; height: 160px; object-fit: contain; border-radius: 50%; margin-bottom: 70px; }
 .eyebrow { color: var(--red); font-size: 10px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
 .eyebrow.dark { color: var(--muted); }
 h1, h2, h3 { margin: 0; font-family: Impact, Anton, sans-serif; font-weight: 400; letter-spacing: -.02em; line-height: .9; }
@@ -60,7 +60,7 @@ legend { padding: 0 8px; font-family: Impact, sans-serif; font-size: 25px; font-
 @media (max-width: 760px) {
   .admin-shell { padding: 18px; }
   .login-card { margin-top: 5vh; }
-  .login-card img { width: 130px; margin-bottom: 45px; }
+  .login-card img { width: 130px; height: 130px; margin-bottom: 45px; }
   .admin-header, .section-head { display: block; }
   .header-actions, .section-actions { margin-top: 24px; flex-wrap: wrap; }
   .admin-tabs { margin: 34px 0; gap: 18px; overflow-x: auto; }

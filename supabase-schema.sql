@@ -62,5 +62,6 @@ insert into public.site_settings (key, value) values
   ('footer', '{"text":"CIVILION 1949. Teknik Sipil dan Lingkungan UGM."}')
 on conflict (key) do update set value = excluded.value, updated_at = now();
 
--- Setelah membuat user di Authentication > Users, jalankan:
--- insert into public.admin_users (email) values ('email-admin-kamu@example.com') on conflict (email) do nothing;
+insert into public.admin_users (email)
+values ('admin@gmail.com')
+on conflict (email) do nothing;

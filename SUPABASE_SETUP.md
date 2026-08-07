@@ -1,12 +1,12 @@
 # Supabase Setup
 
 1. Buka Supabase **SQL Editor**, jalankan seluruh isi `supabase-schema.sql`.
-2. Buka **Authentication > Users**, buat user admin dengan email/password.
-3. Jalankan SQL ini dengan email yang sama:
+2. Buka **Authentication > Users**, buat user admin dengan email `admin@gmail.com` dan password kuat.
+3. Jalankan SQL ini:
 
 ```sql
 insert into public.admin_users (email)
-values ('email-admin-kamu@example.com')
+values ('admin@gmail.com')
 on conflict (email) do nothing;
 ```
 
