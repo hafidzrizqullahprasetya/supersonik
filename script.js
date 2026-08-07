@@ -108,6 +108,7 @@ function updateProgress() {
 function setPlaying(isPlaying) {
   player.classList.toggle('playing', isPlaying);
   recordArt.classList.toggle('playing', isPlaying);
+  recordArt.querySelector('.record-disc').style.animationPlayState = isPlaying ? 'running' : 'paused';
   playButton.setAttribute('aria-label', `${isPlaying ? 'Jeda' : 'Putar'} ${trackTitle.textContent}`);
 }
 
