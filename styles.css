@@ -124,7 +124,7 @@ img { display: block; max-width: 100%; }
 .release { position: relative; display: grid; grid-template-columns: minmax(280px, .76fr) minmax(460px, 1.24fr); grid-template-rows: auto auto; min-height: 0; background: var(--ink); color: var(--white); padding: 112px var(--gutter) 124px; gap: 72px clamp(35px, 6vw, 110px); align-items: start; overflow: visible; }
 .release::before { content: "02 / 05"; position: absolute; top: 40px; left: var(--gutter); color: var(--gray); font-size: 10px; font-weight: 700; letter-spacing: .16em; }
 .release::after { content: "CIVILION"; position: absolute; top: 28px; right: -5px; font-family: Anton, sans-serif; font-size: clamp(80px, 13vw, 205px); line-height: 1; color: transparent; -webkit-text-stroke: 1px rgba(247,245,239,.13); white-space: nowrap; pointer-events: none; }
-.release-heading { position: relative; z-index: 2; align-self: stretch; display: flex; flex-direction: column; justify-content: center; padding: 34px 0 30px; border-top: 2px solid var(--white); border-bottom: 1px solid rgba(247,245,239,.24); }
+.release-heading { position: relative; z-index: 2; align-self: stretch; display: flex; flex-direction: column; justify-content: center; padding: 34px 0 30px; }
 .release-heading { order: 1; }
 .release h2 { max-width: 520px; font-size: clamp(62px, 7vw, 110px); }
 .release-heading .eyebrow.dark { color: #a9a39a; }
