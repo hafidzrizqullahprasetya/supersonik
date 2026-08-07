@@ -18,6 +18,11 @@ window.civilionContentPromise = (async () => {
       hero.location = 'Departemen Teknik Sipil dan Lingkungan UGM, Yogyakarta';
     }
     if (release.cover_label === 'SUPERSONIK') release.cover_label = 'CIVILION 1949';
+    if (release.title === 'NYALAKAN' && release.title_emphasis === 'TRIBUNMU.') {
+      release.title = 'THIS IS US!';
+      release.title_emphasis = '';
+      release.cover_title = 'CIVILION CHANT!';
+    }
     if (branding.logo_url === 'logo-supersonik.png') branding.logo_url = 'logo-civilion.jpg';
     if (branding.collaborator_logo_url === 'logo-logo.png') branding.collaborator_logo_url = 'logo-civilion.jpg';
     if (branding.source_url?.includes('sites.google.com')) branding.source_url = 'https://www.instagram.com/civilion1949/';

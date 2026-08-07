@@ -74,7 +74,7 @@ create policy "Admins manage chants" on public.chants for all using (public.is_a
 
 insert into public.site_settings (key, value) values
   ('hero', '{"eyebrow":"209 posts · 2,449 followers","title":"CIVILION","title_emphasis":"1949","description":"Official Instagram of Civilion 1949, Civil Engineering UGM fanatics. ¡Vinci per noi!","background_url":"hero-bg.webp","location":"Departemen Teknik Sipil dan Lingkungan UGM, Yogyakarta"}'),
-  ('release', '{"eyebrow":"Koleksi chant CIVILION","title":"NYALAKAN","title_emphasis":"TRIBUNMU.","cover_label":"CIVILION 1949","cover_title":"CHANT COLLECTION"}'),
+  ('release', '{"eyebrow":"Koleksi chant CIVILION","title":"THIS IS US!","title_emphasis":"","cover_label":"CIVILION 1949","cover_title":"CIVILION CHANT!"}'),
   ('branding', '{"logo_url":"logo-civilion.jpg","collaborator_logo_url":"logo-civilion.jpg","source_url":"https://www.instagram.com/civilion1949/"}'),
   ('footer', '{"text":"CIVILION 1949. Teknik Sipil dan Lingkungan UGM."}')
 on conflict (key) do update set value = excluded.value, updated_at = now();
