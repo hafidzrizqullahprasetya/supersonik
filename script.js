@@ -182,5 +182,5 @@ chantItems.forEach((item) => {
   }
 });
 updateProgress();
-renderLyrics(chantItems[0]);
+selectTrack(chantItems[0]);
 });
