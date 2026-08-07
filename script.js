@@ -1,6 +1,13 @@
 const menuButton = document.querySelector('.menu-toggle');
 const navigation = document.querySelector('.main-nav');
 
+function closeMenu() {
+  menuButton.setAttribute('aria-expanded', 'false');
+  menuButton.querySelector('.sr-only').textContent = 'Buka menu';
+  navigation.classList.remove('open');
+  document.body.classList.remove('menu-open');
+}
+
 menuButton.addEventListener('click', () => {
   const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
   menuButton.setAttribute('aria-expanded', String(!isOpen));
@@ -9,22 +16,10 @@ menuButton.addEventListener('click', () => {
   document.body.classList.toggle('menu-open', !isOpen);
 });
 
-navigation.querySelectorAll('a').forEach((link) => {
-  link.addEventListener('click', () => {
-    menuButton.setAttribute('aria-expanded', 'false');
-    menuButton.querySelector('.sr-only').textContent = 'Buka menu';
-    navigation.classList.remove('open');
-    document.body.classList.remove('menu-open');
-  });
-});
+navigation.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
 
 window.addEventListener('resize', () => {
-  if (window.innerWidth > 720 && navigation.classList.contains('open')) {
-    menuButton.setAttribute('aria-expanded', 'false');
-    menuButton.querySelector('.sr-only').textContent = 'Buka menu';
-    navigation.classList.remove('open');
-    document.body.classList.remove('menu-open');
-  }
+  if (window.innerWidth > 720) closeMenu();
 });
 
 const player = document.querySelector('.player-panel');
@@ -33,105 +28,163 @@ const playButton = document.querySelector('.play-button');
 const progressButton = document.querySelector('.progress');
 const progressFill = document.querySelector('.progress-fill');
 const currentTime = document.querySelector('.current-time');
-const release = document.querySelector('.release');
-const lyricsToggle = document.querySelector('.lyrics-toggle');
-const lyricsToggleLabel = document.querySelector('.lyrics-toggle-label');
-const syncedLyrics = document.querySelector('.synced-lyrics');
-const syncedLines = [...document.querySelectorAll('.synced-line')];
-const duration = 222;
-let elapsed = 0;
-let timer;
-let activeLineIndex = -1;
+const durationLabel = document.querySelector('.duration');
+const trackTitle = document.querySelector('.track-copy h3');
+const trackLabel = document.querySelector('.track-copy span');
+const trackAudio = document.querySelector('.track-audio');
+const trackSource = trackAudio.querySelector('source');
+const chantItems = [...document.querySelectorAll('.chant-item')];
+const chantEntries = [...document.querySelectorAll('.chant-entry')];
+const chantDetail = document.querySelector('.chant-detail');
+const lyricsPanel = document.querySelector('.lyrics-panel');
+const lyricsTitle = document.querySelector('.lyrics-heading h3');
+const lyricsLines = document.querySelector('.lyrics-lines');
 
-function setLyricsOpen(isOpen) {
-  lyricsToggle.setAttribute('aria-expanded', String(isOpen));
-  lyricsToggleLabel.textContent = isOpen ? 'Sembunyikan lirik' : 'Tampilkan lirik';
-  syncedLyrics.classList.toggle('open', isOpen);
-  release.classList.toggle('lyrics-open', isOpen);
+const titlesBySource = {
+  'TeknikGadjahMadaGitar.mp3': 'Teknik Gadjah Mada',
+  'syalalaGitar.mp3': 'Bela Kau',
+  'SupersonikYangKutungguGitar.mp3': 'Supersonik yang Kutunggu',
+  'LaGrandeGitar.mp3': 'La Grande Teknik',
+  'KemenanganGitar.mp3': 'Kemenangan',
+  'HariIniGitar.mp3': 'Hari Ini',
+  'BukalahMatamuGitar': 'Bukalah Matamu',
+  'AyoBangGitar.mp3': 'Ayo Bang Ayo Neng',
+  'weAreThe.wav': 'We Are The Champion',
+  'andecaAndeci.wav': 'Andeca Andeci',
+  'kamiPemenangnya.wav': 'Pesta Pora',
+  'kamiDatangLagi.wav': 'Teknik Datang Lagi',
+  'terbaikUntukmu.wav': 'Terbaik Untukmu',
+  'hitamHitam.wav': 'Biru-Biru (Basket) Teknik',
+  'supersonikTunjukkanAksimu.wav': 'Tunjukkan Aksimu',
+  'seiringJejakLangkahku.wav': 'Seiring Jejak Langkah (POZNAN DANCE)',
+  'syalalalaTunjukkan.wav': 'Syalala Tunjukkan Semangatmu',
+  'kukibarkanBendera.wav': 'Kukibarkan',
+  'teknikSatu.wav': 'Teknik Satu',
+  'kalauAkuTeknik.wav': 'Kalau Aku Teknik',
+  'ayoTeknikJaya.wav': 'Teknik Jaya',
+  'jiRoLuPat.wav': 'Ji Ro Lu Pat',
+  'disiniSupersonik.wav': 'Disini Supersonik',
+  'yoAyoTeknikku.wav': 'Eee Ayo Ayo Ayo',
+  'sudahKubilang.wav': 'Jangan Lawan',
+  'ambrolProtol.wav': 'Ambrol Protol',
+  'namaHewan.wav': 'Nama Hewan dan Artinya',
+  'dudiDudiDam.wav': 'Dudidudidam'
+};
+
+function sourceFilename(source) {
+  return source.split('/').pop();
 }
 
-function updateLyrics() {
-  let nextActiveIndex = 0;
+function renderLyrics(item) {
+  const filename = sourceFilename(item.dataset.source);
+  const title = titlesBySource[filename] || item.dataset.title;
+  const lines = lyricsBySource[filename] || [];
+  lyricsTitle.textContent = title;
+  lyricsLines.replaceChildren(...lines.map((line) => {
+    const element = document.createElement('p');
+    element.textContent = line;
+    return element;
+  }));
+  lyricsPanel.hidden = lines.length === 0;
+}
 
-  syncedLines.forEach((line, index) => {
-    if (elapsed >= Number(line.dataset.time)) nextActiveIndex = index;
-  });
+function formatTime(time) {
+  if (!Number.isFinite(time)) return '0:00';
+  return `${Math.floor(time / 60)}:${String(Math.floor(time % 60)).padStart(2, '0')}`;
+}
 
-  syncedLines.forEach((line, index) => {
-    line.classList.toggle('active', index === nextActiveIndex);
-    line.classList.toggle('passed', index < nextActiveIndex);
-    line.setAttribute('aria-current', index === nextActiveIndex ? 'true' : 'false');
-  });
+function updateProgress() {
+  const progress = trackAudio.duration ? trackAudio.currentTime / trackAudio.duration : 0;
+  currentTime.textContent = formatTime(trackAudio.currentTime);
+  durationLabel.textContent = formatTime(trackAudio.duration);
+  progressFill.style.width = `${progress * 100}%`;
+}
 
-  if (nextActiveIndex !== activeLineIndex && syncedLyrics.classList.contains('open')) {
-    syncedLines[nextActiveIndex].scrollIntoView({ block: 'center', behavior: 'smooth' });
+function setPlaying(isPlaying) {
+  player.classList.toggle('playing', isPlaying);
+  recordArt.classList.toggle('playing', isPlaying);
+  playButton.setAttribute('aria-label', `${isPlaying ? 'Jeda' : 'Putar'} ${trackTitle.textContent}`);
+}
+
+function selectTrack(item, shouldPlay = false) {
+  const entry = item.closest('.chant-entry');
+  const wasOpen = entry.classList.contains('active');
+  if (wasOpen && !shouldPlay) {
+    entry.classList.remove('active');
+    item.setAttribute('aria-expanded', 'false');
+    trackAudio.pause();
+    return;
   }
-
-  activeLineIndex = nextActiveIndex;
-}
-
-function updatePlayer() {
-  const minutes = Math.floor(elapsed / 60);
-  const seconds = String(Math.floor(elapsed % 60)).padStart(2, '0');
-  currentTime.textContent = `${minutes}:${seconds}`;
-  progressFill.style.width = `${(elapsed / duration) * 100}%`;
-  updateLyrics();
-}
-
-function pausePlayer() {
-  clearInterval(timer);
-  player.classList.remove('playing');
-  recordArt.classList.remove('playing');
-  playButton.setAttribute('aria-label', 'Putar Ramuan Kemenangan');
-}
-
-function playPlayer() {
-  clearInterval(timer);
-  player.classList.add('playing');
-  recordArt.classList.add('playing');
-  playButton.setAttribute('aria-label', 'Jeda Ramuan Kemenangan');
-  setLyricsOpen(true);
-  timer = setInterval(() => {
-    elapsed += 1;
-    if (elapsed >= duration) {
-      elapsed = 0;
-      pausePlayer();
-    }
-    updatePlayer();
-  }, 1000);
+  chantEntries.forEach((chantEntry) => {
+    const active = chantEntry === entry;
+    chantEntry.classList.toggle('active', active);
+    chantEntry.querySelector('.chant-item').setAttribute('aria-expanded', String(active));
+  });
+  if (chantDetail.parentElement !== entry) entry.append(chantDetail);
+  const filename = sourceFilename(item.dataset.source);
+  const title = titlesBySource[filename] || item.dataset.title;
+  item.dataset.title = title;
+  item.querySelector('strong').textContent = title;
+  trackTitle.textContent = title;
+  trackLabel.textContent = `Chant ${item.querySelector('span').textContent}`;
+  trackSource.src = item.dataset.source;
+  if (item.dataset.type) trackSource.type = item.dataset.type;
+  trackAudio.load();
+  updateProgress();
+  renderLyrics(item);
+  if (shouldPlay) {
+    trackAudio.play().catch(() => setPlaying(false));
+    window.setTimeout(() => chantDetail.scrollIntoView({
+      behavior: 'smooth',
+      block: window.matchMedia('(max-width: 720px)').matches ? 'start' : 'nearest'
+    }), 180);
+  }
 }
 
 playButton.addEventListener('click', () => {
-  if (player.classList.contains('playing')) pausePlayer();
-  else playPlayer();
+  if (trackAudio.paused) trackAudio.play().catch(() => setPlaying(false));
+  else trackAudio.pause();
 });
 
 progressButton.addEventListener('click', (event) => {
+  if (!trackAudio.duration) return;
   const rect = progressButton.getBoundingClientRect();
-  elapsed = Math.max(0, Math.min(duration, ((event.clientX - rect.left) / rect.width) * duration));
-  updatePlayer();
+  trackAudio.currentTime = Math.max(0, Math.min(1, (event.clientX - rect.left) / rect.width)) * trackAudio.duration;
+  updateProgress();
 });
 
-lyricsToggle.addEventListener('click', () => {
-  setLyricsOpen(lyricsToggle.getAttribute('aria-expanded') !== 'true');
+progressButton.addEventListener('keydown', (event) => {
+  if (!trackAudio.duration || !['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+  event.preventDefault();
+  if (event.key === 'Home') trackAudio.currentTime = 0;
+  else if (event.key === 'End') trackAudio.currentTime = trackAudio.duration;
+  else trackAudio.currentTime += event.key === 'ArrowRight' ? 5 : -5;
+  updateProgress();
 });
 
-syncedLines.forEach((line) => {
-  line.addEventListener('click', () => {
-    elapsed = Number(line.dataset.time);
-    updatePlayer();
-    if (!player.classList.contains('playing')) playPlayer();
+chantItems.forEach((item) => {
+  item.addEventListener('click', () => {
+    const isActive = item.closest('.chant-entry').classList.contains('active');
+    selectTrack(item, !isActive);
   });
 });
 
-updatePlayer();
-
-const joinForm = document.querySelector('.join-form');
-const formMessage = document.querySelector('.form-message');
-
-joinForm.addEventListener('submit', (event) => {
-  event.preventDefault();
-  const email = new FormData(joinForm).get('email');
-  formMessage.textContent = `Sip, kabar tribun berikutnya akan dikirim ke ${email}.`;
-  joinForm.reset();
+trackAudio.addEventListener('play', () => setPlaying(true));
+trackAudio.addEventListener('pause', () => setPlaying(false));
+trackAudio.addEventListener('ended', () => {
+  setPlaying(false);
+  trackAudio.currentTime = 0;
+  updateProgress();
 });
+trackAudio.addEventListener('timeupdate', updateProgress);
+trackAudio.addEventListener('loadedmetadata', updateProgress);
+
+chantItems.forEach((item) => {
+  const title = titlesBySource[sourceFilename(item.dataset.source)];
+  if (title) {
+    item.dataset.title = title;
+    item.querySelector('strong').textContent = title;
+  }
+});
+updateProgress();
+renderLyrics(chantItems[0]);
