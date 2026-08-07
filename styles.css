@@ -137,7 +137,6 @@ img { display: block; max-width: 100%; }
 .record-disc { position: absolute; width: 70%; aspect-ratio: 1; right: -31%; top: 15%; border-radius: 50%; background: repeating-radial-gradient(circle, #111 0 3px, #222 4px 5px); box-shadow: -12px 10px 30px rgba(0,0,0,.28); }
 .record-disc i { position: absolute; width: 29%; aspect-ratio: 1; left: 35.5%; top: 35.5%; border-radius: 50%; background: var(--white); border: 16px solid var(--red); }
 .player-panel { position: relative; z-index: 2; border-top: 1px solid var(--ink); padding: 22px 0 0; display: grid; grid-template-columns: 55px 1fr 74px; column-gap: 20px; width: min(760px, 100%); margin: 38px 0 0 auto; }
-.track-number { font-size: 11px; color: #6d6b65; }
 .track-copy span { font-size: 10px; text-transform: uppercase; letter-spacing: .12em; color: #6d6b65; }
 .track-copy h3 { margin: 11px 0 4px; font-family: "DM Serif Display", serif; font-size: clamp(25px, 2.2vw, 34px); font-weight: 400; }
 .track-copy p { margin: 0; color: #77736b; font-size: 13px; }
@@ -232,7 +231,6 @@ img { display: block; max-width: 100%; }
   .record-copy strong { font-size: clamp(43px, 14vw, 60px); }
    .record-disc i { border-width: 10px; }
    .player-panel { width: 100%; padding-top: 16px; grid-template-columns: minmax(0, 1fr) 54px; column-gap: 14px; align-items: center; }
-  .track-number { display: none; }
   .track-copy { min-width: 0; }
   .track-copy span { font-size: 8px; }
   .track-copy h3 { margin: 7px 0 3px; font-size: clamp(24px, 7.5vw, 31px); line-height: 1.02; text-wrap: balance; }
