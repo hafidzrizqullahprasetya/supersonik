@@ -127,6 +127,7 @@ img { display: block; max-width: 100%; }
 .release-heading { position: relative; z-index: 2; align-self: stretch; display: flex; flex-direction: column; justify-content: center; padding: 34px 0 30px; }
 .release-heading { order: 1; }
 .release h2 { max-width: 520px; font-size: clamp(62px, 7vw, 110px); }
+.release h2 { color: #9e1016; }
 .release-heading .eyebrow.dark { color: #a9a39a; }
 .release h2 span, .catalog-heading h3 span { display: block; }
 .record-art { position: relative; z-index: 2; aspect-ratio: 1; background: #9e1016; box-shadow: 0 32px 70px rgba(0,0,0,.28); overflow: hidden; isolation: isolate; }
