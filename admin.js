@@ -79,7 +79,15 @@ loginForm.addEventListener('submit', async (event) => {
     const data = new FormData(loginForm);
     await api.signIn(data.get('email'), data.get('password'));
     await showDashboard();
-  } catch (error) { setStatus(loginStatus, 'Login gagal. Pastikan user sudah dibuat di Supabase Auth dan terdaftar di admin_users.'); }
+  } catch (error) {
+    const message = error.message.toLowerCase();
+    const hint = message.includes('invalid login credentials')
+      ? 'Email atau password salah, atau user belum dibuat di Supabase Auth.'
+      : message.includes('email not confirmed')
+        ? 'Email admin belum dikonfirmasi di Supabase Auth.'
+        : 'User belum terdaftar sebagai admin atau schema Supabase belum dijalankan.';
+    setStatus(loginStatus, hint);
+  }
 });
 
 async function showDashboard() {
