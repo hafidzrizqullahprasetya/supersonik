@@ -31,7 +31,6 @@ const player = document.querySelector('.player-panel');
 const recordArt = document.querySelector('.record-art');
 const playButton = document.querySelector('.play-button');
 const progressButton = document.querySelector('.progress');
-const progressFill = document.querySelector('.progress-fill');
 const currentTime = document.querySelector('.current-time');
 const durationLabel = document.querySelector('.duration');
 const trackTitle = document.querySelector('.track-copy h3');
@@ -102,7 +101,8 @@ function updateProgress() {
   const progress = trackAudio.duration ? trackAudio.currentTime / trackAudio.duration : 0;
   currentTime.textContent = formatTime(trackAudio.currentTime);
   durationLabel.textContent = formatTime(trackAudio.duration);
-  progressFill.style.width = `${progress * 100}%`;
+  progressButton.value = progress * 100;
+  progressButton.style.setProperty('--progress', `${progress * 100}%`);
 }
 
 function setPlaying(isPlaying) {
@@ -151,19 +151,9 @@ playButton.addEventListener('click', () => {
   else trackAudio.pause();
 });
 
-progressButton.addEventListener('click', (event) => {
+progressButton.addEventListener('input', () => {
   if (!trackAudio.duration) return;
-  const rect = progressButton.getBoundingClientRect();
-  trackAudio.currentTime = Math.max(0, Math.min(1, (event.clientX - rect.left) / rect.width)) * trackAudio.duration;
-  updateProgress();
-});
-
-progressButton.addEventListener('keydown', (event) => {
-  if (!trackAudio.duration || !['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
-  event.preventDefault();
-  if (event.key === 'Home') trackAudio.currentTime = 0;
-  else if (event.key === 'End') trackAudio.currentTime = trackAudio.duration;
-  else trackAudio.currentTime += event.key === 'ArrowRight' ? 5 : -5;
+  trackAudio.currentTime = (Number(progressButton.value) / 100) * trackAudio.duration;
   updateProgress();
 });
 
