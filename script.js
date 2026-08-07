@@ -2,6 +2,10 @@ window.supersonikContentPromise.then(() => {
 const menuButton = document.querySelector('.menu-toggle');
 const navigation = document.querySelector('.main-nav');
 
+document.querySelectorAll('.chant-icon').forEach((icon) => {
+  if (!icon.querySelector('.fa-solid')) icon.innerHTML = '<i class="fa-solid fa-arrow-up-right-from-square"></i>';
+});
+
 function closeMenu() {
   menuButton.setAttribute('aria-expanded', 'false');
   menuButton.querySelector('.sr-only').textContent = 'Buka menu';

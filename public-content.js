@@ -50,7 +50,7 @@ window.supersonikContentPromise = (async () => {
         button.dataset.databaseContent = 'true';
         button.dataset.source = chant.audio_url;
         button.dataset.type = chant.audio_type || 'audio/mpeg';
-        button.innerHTML = `<span>${String(index + 1).padStart(2, '0')}</span><strong></strong><b class="external-icon" aria-hidden="true"></b>`;
+        button.innerHTML = `<span>${String(index + 1).padStart(2, '0')}</span><strong></strong><b class="chant-icon" aria-hidden="true"><i class="fa-solid fa-arrow-up-right-from-square"></i></b>`;
         button.querySelector('strong').textContent = chant.title;
         entry.append(button);
         list.append(entry);
