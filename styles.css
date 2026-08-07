@@ -147,8 +147,9 @@ img { display: block; max-width: 100%; }
 .pause-icon { display: none; }
 .player-panel.playing .play-icon { display: none; }
 .player-panel.playing .pause-icon { display: block; }
-.record-art.playing .record-disc { animation: spin 4s linear infinite; }
-@keyframes spin { to { transform: rotate(360deg); } }
+.record-disc { transform-origin: 50% 50%; will-change: transform; }
+.record-art.playing .record-disc { animation: cd-spin 1.8s linear infinite; animation-play-state: running; }
+@keyframes cd-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 .progress-wrap { grid-column: 1 / -1; display: grid; grid-template-columns: 35px 1fr 35px; gap: 10px; align-items: center; margin-top: 28px; font-size: 10px; color: #77736b; }
 .progress { --progress: 0%; width: 100%; height: 18px; margin: 0; appearance: none; -webkit-appearance: none; background: transparent; cursor: pointer; }
 .progress::-webkit-slider-runnable-track { height: 2px; background: linear-gradient(to right, var(--red) 0 var(--progress), rgba(247,245,239,.28) var(--progress) 100%); }
