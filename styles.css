@@ -56,6 +56,9 @@ img { display: block; max-width: 100%; }
 .main-nav a:hover, .header-cta:hover, .footer-links a:hover { opacity: .58; }
 .header-cta { justify-self: end; font-size: 13px; font-weight: 700; text-transform: uppercase; }
 .header-cta span { color: var(--red); margin-left: 8px; }
+.external-icon { position: relative; display: inline-block; width: 12px; height: 12px; margin-left: 7px; color: currentColor; vertical-align: -.1em; }
+.external-icon::before { content: ""; position: absolute; right: 0; top: 0; width: 7px; height: 7px; border-top: 1.5px solid currentColor; border-right: 1.5px solid currentColor; }
+.external-icon::after { content: ""; position: absolute; right: 1px; top: 1px; width: 9px; height: 1.5px; background: currentColor; transform: rotate(-45deg); transform-origin: right center; }
 .menu-toggle { display: none; background: none; border: 0; }
 
 .hero {
@@ -71,7 +74,9 @@ img { display: block; max-width: 100%; }
   position: absolute;
   z-index: -3;
   inset: 0;
-  background-image: url("hero-bg.jpg");
+  background-image: url("hero-bg.webp");
+  background-image: -webkit-image-set(url("hero-bg.avif") 1x, url("hero-bg.webp") 1x);
+  background-image: image-set(url("hero-bg.avif") type("image/avif"), url("hero-bg.webp") type("image/webp"));
   background-size: cover;
   background-position: center 42%;
   filter: grayscale(1) contrast(1.08);
@@ -156,7 +161,9 @@ img { display: block; max-width: 100%; }
 .chant-item:hover { border-color: var(--red); background: #fffdf7; box-shadow: 0 3px 0 var(--red); }
 .chant-item span { color: #77736b; font-size: 9px; letter-spacing: .1em; text-transform: uppercase; }
 .chant-item strong { overflow: hidden; font-family: "DM Serif Display", serif; font-size: clamp(16px, 1.4vw, 22px); font-weight: 400; text-overflow: ellipsis; white-space: nowrap; }
-.chant-item b { font-size: 17px; font-weight: 400; transition: transform .25s; }
+.chant-item b { font-size: 0; font-weight: 400; transition: transform .25s; }
+.chant-item b::before { content: ""; display: block; width: 10px; height: 10px; border-top: 1.5px solid currentColor; border-right: 1.5px solid currentColor; }
+.chant-item b::after { content: ""; display: block; width: 9px; height: 1.5px; margin: -5px 0 0 1px; background: currentColor; transform: rotate(-45deg); transform-origin: right center; }
 .chant-item:hover b, .chant-item.active b { color: var(--red); }
 .chant-item.active { border-color: var(--red); background: var(--red); box-shadow: 0 3px 0 #9e1016; color: var(--white); }
 .chant-item.active strong { color: var(--white); }
