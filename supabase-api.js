@@ -2,7 +2,7 @@
   const config = window.SUPABASE_CONFIG;
   if (!config?.url || !config?.publishableKey) return;
 
-  const sessionKey = 'supersonik_admin_session';
+  const sessionKey = 'civilion_admin_session';
   const baseHeaders = {
     apikey: config.publishableKey,
     'Content-Type': 'application/json'

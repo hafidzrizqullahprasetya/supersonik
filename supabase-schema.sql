@@ -56,11 +56,11 @@ drop policy if exists "Admins manage chants" on public.chants;
 create policy "Admins manage chants" on public.chants for all using (public.is_admin()) with check (public.is_admin());
 
 insert into public.site_settings (key, value) values
-  ('hero', '{"eyebrow":"Collaboration from Teknik UGM","title":"CHANT","title_emphasis":"SUPERSONIK","description":"Kumpulan chant untuk dinyanyikan bersama. Pilih lagu, tekan play, dan nyalakan suara dari tribun.","background_url":"hero-bg.webp","location":"Teknik UGM, Yogyakarta"}'),
-  ('release', '{"eyebrow":"Koleksi chant","title":"NYALAKAN","title_emphasis":"TRIBUNMU.","cover_label":"SUPERSONIK","cover_title":"CHANT COLLECTION"}'),
-  ('branding', '{"logo_url":"logo-supersonik.png","collaborator_logo_url":"logo-logo.png","source_url":"https://sites.google.com/mail.ugm.ac.id/chantsupersonik2024/home"}'),
-  ('footer', '{"text":"Supersonik. Koleksi chant Teknik UGM."}')
-on conflict (key) do nothing;
+  ('hero', '{"eyebrow":"209 posts · 2,449 followers","title":"CIVILION","title_emphasis":"1949","description":"Official Instagram of Civilion 1949, Civil Engineering UGM fanatics. ¡Vinci per noi!","background_url":"hero-bg.webp","location":"Departemen Teknik Sipil dan Lingkungan UGM, Yogyakarta"}'),
+  ('release', '{"eyebrow":"Koleksi chant CIVILION","title":"NYALAKAN","title_emphasis":"TRIBUNMU.","cover_label":"CIVILION 1949","cover_title":"CHANT COLLECTION"}'),
+  ('branding', '{"logo_url":"logo-civilion.jpg","collaborator_logo_url":"logo-civilion.jpg","source_url":"https://www.instagram.com/civilion1949/"}'),
+  ('footer', '{"text":"CIVILION 1949. Teknik Sipil dan Lingkungan UGM."}')
+on conflict (key) do update set value = excluded.value, updated_at = now();
 
 -- Setelah membuat user di Authentication > Users, jalankan:
 -- insert into public.admin_users (email) values ('email-admin-kamu@example.com') on conflict (email) do nothing;

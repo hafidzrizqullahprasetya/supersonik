@@ -11,7 +11,7 @@ let chants = [];
 let settings = {};
 
 const defaultSources = [
-  ['Teknik Gadjah Mada', 'TeknikGadjahMadaGitar.mp3', 'audio/mpeg'], ['Bela Kau', 'syalalaGitar.mp3', 'audio/mpeg'], ['Supersonik yang Kutunggu', 'SupersonikYangKutungguGitar.mp3', 'audio/mpeg'], ['La Grande Teknik', 'LaGrandeGitar.mp3', 'audio/mpeg'], ['Kemenangan', 'KemenanganGitar.mp3', 'audio/mpeg'], ['Hari Ini', 'HariIniGitar.mp3', 'audio/mpeg'], ['Bukalah Matamu', 'BukalahMatamuGitar', 'audio/mpeg'], ['Ayo Bang Ayo Neng', 'AyoBangGitar.mp3', 'audio/mpeg'], ['We Are The Champion', 'weAreThe.wav', 'audio/wav'], ['Andeca Andeci', 'andecaAndeci.wav', 'audio/wav'], ['Pesta Pora', 'kamiPemenangnya.wav', 'audio/wav'], ['Teknik Datang Lagi', 'kamiDatangLagi.wav', 'audio/wav'], ['Terbaik Untukmu', 'terbaikUntukmu.wav', 'audio/wav'], ['Biru-Biru (Basket) Teknik', 'hitamHitam.wav', 'audio/wav'], ['Tunjukkan Aksimu', 'supersonikTunjukkanAksimu.wav', 'audio/wav'], ['Seiring Jejak Langkah (POZNAN DANCE)', 'seiringJejakLangkahku.wav', 'audio/wav'], ['Syalala Tunjukkan Semangatmu', 'syalalalaTunjukkan.wav', 'audio/wav'], ['Kukibarkan', 'kukibarkanBendera.wav', 'audio/wav'], ['Teknik Satu', 'teknikSatu.wav', 'audio/wav'], ['Kalau Aku Teknik', 'kalauAkuTeknik.wav', 'audio/wav'], ['Teknik Jaya', 'ayoTeknikJaya.wav', 'audio/wav'], ['Ji Ro Lu Pat', 'jiRoLuPat.wav', 'audio/wav'], ['Disini Supersonik', 'disiniSupersonik.wav', 'audio/wav'], ['Eee Ayo Ayo Ayo', 'yoAyoTeknikku.wav', 'audio/wav'], ['Jangan Lawan', 'sudahKubilang.wav', 'audio/wav'], ['Ambrol Protol', 'ambrolProtol.wav', 'audio/wav'], ['Nama Hewan dan Artinya', 'namaHewan.wav', 'audio/wav'], ['Dudidudidam', 'dudiDudiDam.wav', 'audio/wav']
+  ['Teknik Gadjah Mada', 'TeknikGadjahMadaGitar.mp3', 'audio/mpeg'], ['Bela Kau', 'syalalaGitar.mp3', 'audio/mpeg'], ['CIVILION yang Kutunggu', 'SupersonikYangKutungguGitar.mp3', 'audio/mpeg'], ['La Grande Teknik', 'LaGrandeGitar.mp3', 'audio/mpeg'], ['Kemenangan', 'KemenanganGitar.mp3', 'audio/mpeg'], ['Hari Ini', 'HariIniGitar.mp3', 'audio/mpeg'], ['Bukalah Matamu', 'BukalahMatamuGitar', 'audio/mpeg'], ['Ayo Bang Ayo Neng', 'AyoBangGitar.mp3', 'audio/mpeg'], ['We Are The Champion', 'weAreThe.wav', 'audio/wav'], ['Andeca Andeci', 'andecaAndeci.wav', 'audio/wav'], ['Pesta Pora', 'kamiPemenangnya.wav', 'audio/wav'], ['Teknik Datang Lagi', 'kamiDatangLagi.wav', 'audio/wav'], ['Terbaik Untukmu', 'terbaikUntukmu.wav', 'audio/wav'], ['Biru-Biru (Basket) Teknik', 'hitamHitam.wav', 'audio/wav'], ['CIVILION Tunjukkan Aksimu', 'supersonikTunjukkanAksimu.wav', 'audio/wav'], ['Seiring Jejak Langkah (POZNAN DANCE)', 'seiringJejakLangkahku.wav', 'audio/wav'], ['Syalala Tunjukkan Semangatmu', 'syalalalaTunjukkan.wav', 'audio/wav'], ['Kukibarkan', 'kukibarkanBendera.wav', 'audio/wav'], ['Teknik Satu', 'teknikSatu.wav', 'audio/wav'], ['Kalau Aku Teknik', 'kalauAkuTeknik.wav', 'audio/wav'], ['Teknik Jaya', 'ayoTeknikJaya.wav', 'audio/wav'], ['Ji Ro Lu Pat', 'jiRoLuPat.wav', 'audio/wav'], ['Disini CIVILION', 'disiniSupersonik.wav', 'audio/wav'], ['Eee Ayo Ayo Ayo', 'yoAyoTeknikku.wav', 'audio/wav'], ['Jangan Lawan', 'sudahKubilang.wav', 'audio/wav'], ['Ambrol Protol', 'ambrolProtol.wav', 'audio/wav'], ['Nama Hewan dan Artinya', 'namaHewan.wav', 'audio/wav'], ['Dudidudidam', 'dudiDudiDam.wav', 'audio/wav']
 ];
 
 function setStatus(element, message, error = true) {
@@ -41,7 +41,7 @@ function renderChants() {
     const row = document.createElement('div');
     row.className = 'admin-chant';
     row.innerHTML = `<span class="admin-chant-number">${String(index + 1).padStart(2, '0')}</span><span><strong class="admin-chant-title"></strong><br><small>${chant.published ? 'Published' : 'Draft'}</small></span><button type="button" aria-label="Edit chant">→</button>`;
-    row.querySelector('.admin-chant-title').textContent = chant.title;
+    row.querySelector('.admin-chant-title').textContent = chant.title.replace(/supersonik/gi, 'CIVILION');
     row.querySelector('button').addEventListener('click', () => openEditor(chant));
     return row;
   }));
@@ -111,7 +111,7 @@ document.querySelector('#delete-chant-button').addEventListener('click', async (
 document.querySelector('#seed-button').addEventListener('click', async () => {
   if (!confirm('Import 28 chant default? Data dengan audio URL yang sama akan dibuat ulang.')) return;
   try {
-    const rows = defaultSources.map(([title, filename, audio_type], index) => ({ title, sort_order: index, audio_url: `https://ekarahmadi.github.io/supersonikChant/${filename}`, audio_type, lyrics: window.SUPERSONIK_LYRICS[filename] || [], published: true }));
+    const rows = defaultSources.map(([title, filename, audio_type], index) => ({ title, sort_order: index, audio_url: `https://ekarahmadi.github.io/supersonikChant/${filename}`, audio_type, lyrics: window.CIVILION_LYRICS[filename] || [], published: true }));
     await api.upsert('chants', rows, 'audio_url');
     await loadDashboard();
     setStatus(dashboardStatus, '28 chant berhasil diimport.', false);

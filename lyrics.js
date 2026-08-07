@@ -29,11 +29,12 @@ const lyricsBySource = {
   'dudiDudiDam.wav': ['Dudidudidam dam dudidudidam', 'Dudidudidam dam dudidudidam', 'Kamu dukung siapa? Teknik', 'Teknik didukung siapa? Kami', 'Kami supersonik, kami dutung teknik', 'Teknik ayo digoyang azek azek azek', 'Teknik jadi juara? Satu', 'Lawannya pulang aja! pulang', 'Kami supersonik, Kami dukung teknik', 'Teknik jadi juara, satu satu satu', 'Obat cacing namanya combatrin', 'Supersonik lawannya pipisin', '….. mending pulang jaga lilin', 'Koyo sarimin']
 };
 
-window.SUPERSONIK_LYRICS = lyricsBySource;
-window.SUPERSONIK_TITLES = {
+const civilionLyrics = Object.fromEntries(Object.entries(lyricsBySource).map(([key, lines]) => [key, lines.map((line) => line.replace(/supersonik/gi, 'CIVILION'))]));
+window.CIVILION_LYRICS = civilionLyrics;
+window.CIVILION_TITLES = {
   'TeknikGadjahMadaGitar.mp3': 'Teknik Gadjah Mada',
   'syalalaGitar.mp3': 'Bela Kau',
-  'SupersonikYangKutungguGitar.mp3': 'Supersonik yang Kutunggu',
+  'SupersonikYangKutungguGitar.mp3': 'CIVILION yang Kutunggu',
   'LaGrandeGitar.mp3': 'La Grande Teknik',
   'KemenanganGitar.mp3': 'Kemenangan',
   'HariIniGitar.mp3': 'Hari Ini',
@@ -53,11 +54,11 @@ window.SUPERSONIK_TITLES = {
   'kalauAkuTeknik.wav': 'Kalau Aku Teknik',
   'ayoTeknikJaya.wav': 'Teknik Jaya',
   'jiRoLuPat.wav': 'Ji Ro Lu Pat',
-  'disiniSupersonik.wav': 'Disini Supersonik',
+  'disiniSupersonik.wav': 'Disini CIVILION',
   'yoAyoTeknikku.wav': 'Eee Ayo Ayo Ayo',
   'sudahKubilang.wav': 'Jangan Lawan',
   'ambrolProtol.wav': 'Ambrol Protol',
   'namaHewan.wav': 'Nama Hewan dan Artinya',
   'dudiDudiDam.wav': 'Dudidudidam'
 };
-window.SUPERSONIK_DEFAULT_TITLES = window.SUPERSONIK_TITLES;
+window.CIVILION_DEFAULT_TITLES = window.CIVILION_TITLES;

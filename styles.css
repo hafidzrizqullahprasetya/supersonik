@@ -49,7 +49,7 @@ img { display: block; max-width: 100%; }
   border-bottom: 1px solid rgba(255,255,255,.22);
 }
 .brand { display: inline-flex; width: max-content; align-items: center; }
-.brand-logo { width: 142px; height: 44px; object-fit: contain; object-position: left center; }
+.brand-logo { width: 142px; height: 44px; object-fit: contain; object-position: left center; border-radius: 50%; }
 .main-nav { display: flex; gap: clamp(25px, 3vw, 50px); }
 .main-nav a { font-size: 13px; font-weight: 600; }
 .main-nav a, .footer-links a { transition: opacity .25s ease; }

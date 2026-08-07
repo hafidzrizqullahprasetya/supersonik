@@ -1,4 +1,4 @@
-window.supersonikContentPromise = (async () => {
+window.civilionContentPromise = (async () => {
   if (!window.SupabaseAPI) return null;
   try {
     const [settings, chants] = await Promise.all([
@@ -10,6 +10,18 @@ window.supersonikContentPromise = (async () => {
     const release = byKey.release || {};
     const branding = byKey.branding || {};
     const footer = byKey.footer || {};
+    if (hero.title === 'SUPERSONIK' || hero.eyebrow?.includes('Supersonik')) {
+      hero.eyebrow = '209 posts · 2,449 followers';
+      hero.title = 'CIVILION';
+      hero.title_emphasis = '1949';
+      hero.description = 'Official Instagram of Civilion 1949, Civil Engineering UGM fanatics. ¡Vinci per noi!';
+      hero.location = 'Departemen Teknik Sipil dan Lingkungan UGM, Yogyakarta';
+    }
+    if (release.cover_label === 'SUPERSONIK') release.cover_label = 'CIVILION 1949';
+    if (branding.logo_url === 'logo-supersonik.png') branding.logo_url = 'logo-civilion.jpg';
+    if (branding.collaborator_logo_url === 'logo-logo.png') branding.collaborator_logo_url = 'logo-civilion.jpg';
+    if (branding.source_url?.includes('sites.google.com')) branding.source_url = 'https://www.instagram.com/civilion1949/';
+    if (footer.text?.includes('Supersonik')) footer.text = 'CIVILION 1949. Teknik Sipil dan Lingkungan UGM.';
 
     const setText = (selector, value) => {
       const element = document.querySelector(selector);
@@ -33,7 +45,7 @@ window.supersonikContentPromise = (async () => {
     if (hero.background_url) document.querySelector('.hero-media').style.backgroundImage = `url("${hero.background_url}")`;
     if (branding.logo_url) document.querySelectorAll('.brand-logo').forEach((logo) => { logo.src = branding.logo_url; });
     if (branding.collaborator_logo_url) document.querySelector('.logo-image-row img').src = branding.collaborator_logo_url;
-    if (branding.source_url) document.querySelectorAll('a[href*="sites.google.com"]').forEach((link) => { link.href = branding.source_url; });
+    if (branding.source_url) document.querySelectorAll('a[href*="sites.google.com"], a[href*="instagram.com"]').forEach((link) => { link.href = branding.source_url; });
 
     if (chants.length) {
       const list = document.querySelector('.chant-list');
@@ -46,7 +58,7 @@ window.supersonikContentPromise = (async () => {
         button.type = 'button';
         button.className = 'chant-item';
         button.setAttribute('aria-expanded', 'false');
-        button.dataset.title = chant.title;
+        button.dataset.title = chant.title.replace(/supersonik/gi, 'CIVILION');
         button.dataset.databaseContent = 'true';
         button.dataset.source = chant.audio_url;
         button.dataset.type = chant.audio_type || 'audio/mpeg';
@@ -54,7 +66,7 @@ window.supersonikContentPromise = (async () => {
         button.querySelector('strong').textContent = chant.title;
         entry.append(button);
         list.append(entry);
-        window.SUPERSONIK_LYRICS[chant.audio_url.split('/').pop()] = chant.lyrics || [];
+        window.CIVILION_LYRICS[chant.audio_url.split('/').pop()] = (chant.lyrics || []).map((line) => line.replace(/supersonik/gi, 'CIVILION'));
       });
       if (detail && list.firstElementChild) list.firstElementChild.append(detail);
     }

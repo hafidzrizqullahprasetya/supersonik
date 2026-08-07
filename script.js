@@ -1,4 +1,4 @@
-window.supersonikContentPromise.then(() => {
+window.civilionContentPromise.then(() => {
 const menuButton = document.querySelector('.menu-toggle');
 const navigation = document.querySelector('.main-nav');
 
@@ -45,7 +45,7 @@ const lyricsPanel = document.querySelector('.lyrics-panel');
 const lyricsTitle = document.querySelector('.lyrics-heading h3');
 const lyricsLines = document.querySelector('.lyrics-lines');
 
-const titlesBySource = window.SUPERSONIK_TITLES || {
+const titlesBySource = window.CIVILION_TITLES || {
   'TeknikGadjahMadaGitar.mp3': 'Teknik Gadjah Mada',
   'syalalaGitar.mp3': 'Bela Kau',
   'SupersonikYangKutungguGitar.mp3': 'Supersonik yang Kutunggu',
@@ -83,7 +83,7 @@ function sourceFilename(source) {
 function renderLyrics(item) {
   const filename = sourceFilename(item.dataset.source);
   const title = item.dataset.databaseContent ? item.dataset.title : (titlesBySource[filename] || item.dataset.title);
-  const lines = window.SUPERSONIK_LYRICS[filename] || lyricsBySource[filename] || [];
+  const lines = window.CIVILION_LYRICS[filename] || lyricsBySource[filename] || [];
   lyricsTitle.textContent = title;
   lyricsLines.replaceChildren(...lines.map((line) => {
     const element = document.createElement('p');
