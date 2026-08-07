@@ -73,13 +73,20 @@ function flattenSettings() {
 }
 
 function updatePreviews() {
-  setPreview(mediaPreviews.hero, settings.hero?.background_url);
-  setPreview(mediaPreviews.logo, settings.branding?.logo_url);
-  setPreview(mediaPreviews.collaborator, settings.branding?.collaborator_logo_url);
+  setPreview(mediaPreviews.hero, settings.hero?.background_url || 'hero-bg.webp', 'hero-bg.webp');
+  setPreview(mediaPreviews.logo, settings.branding?.logo_url || 'logo-civilion.jpg', 'logo-civilion.jpg');
+  setPreview(mediaPreviews.collaborator, settings.branding?.collaborator_logo_url || 'logo-civilion.jpg', 'logo-civilion.jpg');
 }
 
-function setPreview(preview, url) {
+function setPreview(preview, url, fallback = '') {
   if (url) {
+    preview.onerror = () => {
+      if (fallback && preview.src !== new URL(fallback, window.location.href).href) {
+        preview.src = fallback;
+        return;
+      }
+      preview.hidden = true;
+    };
     preview.src = url;
     preview.hidden = false;
   } else {
@@ -222,9 +229,9 @@ document.querySelector('#delete-audio-button').addEventListener('click', async (
 mediaInputs.hero.addEventListener('change', async () => { const file = mediaInputs.hero.files[0]; if (!file) return; try { await uploadSettingMedia(file, 'hero', 'background_url'); } catch (error) { await showModal({ title: 'Upload background gagal', message: error.message, tone: 'error' }); } });
 mediaInputs.logo.addEventListener('change', async () => { const file = mediaInputs.logo.files[0]; if (!file) return; try { await uploadSettingMedia(file, 'branding', 'logo_url'); } catch (error) { await showModal({ title: 'Upload logo gagal', message: error.message, tone: 'error' }); } });
 mediaInputs.collaborator.addEventListener('change', async () => { const file = mediaInputs.collaborator.files[0]; if (!file) return; try { await uploadSettingMedia(file, 'branding', 'collaborator_logo_url'); } catch (error) { await showModal({ title: 'Upload logo gagal', message: error.message, tone: 'error' }); } });
-settingsForm.elements['hero.background_url'].addEventListener('input', () => setPreview(mediaPreviews.hero, settingsForm.elements['hero.background_url'].value));
-settingsForm.elements['branding.logo_url'].addEventListener('input', () => setPreview(mediaPreviews.logo, settingsForm.elements['branding.logo_url'].value));
-settingsForm.elements['branding.collaborator_logo_url'].addEventListener('input', () => setPreview(mediaPreviews.collaborator, settingsForm.elements['branding.collaborator_logo_url'].value));
+settingsForm.elements['hero.background_url'].addEventListener('input', () => setPreview(mediaPreviews.hero, settingsForm.elements['hero.background_url'].value, 'hero-bg.webp'));
+settingsForm.elements['branding.logo_url'].addEventListener('input', () => setPreview(mediaPreviews.logo, settingsForm.elements['branding.logo_url'].value, 'logo-civilion.jpg'));
+settingsForm.elements['branding.collaborator_logo_url'].addEventListener('input', () => setPreview(mediaPreviews.collaborator, settingsForm.elements['branding.collaborator_logo_url'].value, 'logo-civilion.jpg'));
 document.querySelector('#delete-hero-button').addEventListener('click', async () => { try { await deleteSettingMedia('hero', 'background_url'); } catch (error) { await showModal({ title: 'Gagal menghapus background', message: error.message, tone: 'error' }); } });
 document.querySelector('#delete-logo-button').addEventListener('click', async () => { try { await deleteSettingMedia('branding', 'logo_url'); } catch (error) { await showModal({ title: 'Gagal menghapus logo', message: error.message, tone: 'error' }); } });
 document.querySelector('#delete-collaborator-button').addEventListener('click', async () => { try { await deleteSettingMedia('branding', 'collaborator_logo_url'); } catch (error) { await showModal({ title: 'Gagal menghapus logo', message: error.message, tone: 'error' }); } });
